@@ -18,14 +18,12 @@ public class AdminUserJoinController {
     private final AdminUserJoinService adminUserJoinService;
     @GetMapping("/admin-user/join")
     public String getRequestAdminPage() {
-        return "redirect:/admin-user-join";
+        return "redirect:/admin-user-join.html";
     }
 
     @ResponseBody
     @PostMapping("/admin-user/join")
     public ResponseEntity<String> requestAdminUser(@RequestBody AdminUserJoinForm adminUserJoinForm) {
-        System.out.println(adminUserJoinForm.toString());
-
         adminUserJoinService.join(adminUserJoinForm);
 
         return new ResponseEntity<>("ok", HttpStatus.OK);

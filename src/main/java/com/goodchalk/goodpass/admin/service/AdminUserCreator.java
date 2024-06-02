@@ -19,7 +19,6 @@ public class AdminUserCreator {
                 .name(adminUserJoinForm.getName())
                 .contact(adminUserJoinForm.getContact())
                 .emailAddress(adminUserJoinForm.getEmailAddress())
-                .adminRole(AdminRole.MANAGER)
                 .createDateTime(LocalDateTime.now())
                 .build();
     }

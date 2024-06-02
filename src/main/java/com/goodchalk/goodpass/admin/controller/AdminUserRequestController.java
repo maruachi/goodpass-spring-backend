@@ -17,7 +17,7 @@ public class AdminUserRequestController {
     private final AdminUserRequestMailService adminUserRequestMailService;
     @GetMapping("/admin-user/request")
     public String getRequestAdminPage() {
-        return "redirect:/admin-user";
+        return "redirect:/admin-user-request.html";
     }
 
     @ResponseBody

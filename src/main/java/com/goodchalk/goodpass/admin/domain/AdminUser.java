@@ -22,8 +22,13 @@ public class AdminUser {
     private String name;
     private String contact;
     private String emailAddress;
+    @Enumerated(EnumType.STRING)
     private AdminRole adminRole;
     private LocalDateTime createDateTime;
+
+    public void setAdminRoleToManager() {
+        this.adminRole = AdminRole.MANAGER;
+    }
 
 }
 
