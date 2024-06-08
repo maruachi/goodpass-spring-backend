@@ -5,6 +5,7 @@ import com.goodchalk.goodpass.admin.service.AdminUserJoinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ public class AdminUserJoinController {
 
     @ResponseBody
     @PostMapping("/admin/join")
+    @PreAuthorize("hasRole('MASTER')")
     public ResponseEntity<String> requestAdminUser(@RequestBody AdminUserJoinDto adminUserJoinDto) {
         adminUserJoinService.join(adminUserJoinDto);
 
