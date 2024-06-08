@@ -30,5 +30,8 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
+  jwt:
+    secret: ${SECRET_KEY}
+    expiredSeconds: 7200000
 server:
   port: 8081
