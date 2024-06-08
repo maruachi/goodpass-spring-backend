@@ -1,4 +1,4 @@
-package com.goodchalk.goodpass.admin.controller.form;
+package com.goodchalk.goodpass.admin.controller.dto;
 
 import lombok.Builder;
 import lombok.Getter;

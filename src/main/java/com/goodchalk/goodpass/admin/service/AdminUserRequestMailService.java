@@ -1,6 +1,6 @@
 package com.goodchalk.goodpass.admin.service;
 
-import com.goodchalk.goodpass.admin.controller.form.AdminUserRequestForm;
+import com.goodchalk.goodpass.admin.controller.dto.AdminUserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,8 +13,8 @@ public class AdminUserRequestMailService {
     public static final String EMAIL_SUBJECT = "굿패스 가입 신청서";
     private final JavaMailSender mailSender;
 
-    public boolean sendUserRequestMail(AdminUserRequestForm adminUserRequestForm) {
-        String mailBody = adminUserRequestForm.toString();
+    public boolean sendUserRequestMail(AdminUserRequestDto adminUserRequestDto) {
+        String mailBody = adminUserRequestDto.toString();
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(TARGET_EMAIL);
         mailMessage.setSubject(EMAIL_SUBJECT);

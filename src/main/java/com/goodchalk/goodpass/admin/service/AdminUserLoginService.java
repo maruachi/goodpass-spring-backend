@@ -1,6 +1,6 @@
 package com.goodchalk.goodpass.admin.service;
 
-import com.goodchalk.goodpass.admin.controller.form.AdminUserLoginDto;
+import com.goodchalk.goodpass.admin.controller.dto.AdminUserLoginDto;
 import com.goodchalk.goodpass.admin.domain.AdminUser;
 import com.goodchalk.goodpass.admin.domain.AdminUserRepository;
 import com.goodchalk.goodpass.exception.GoodPassBusinessException;

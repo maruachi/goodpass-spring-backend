@@ -1,4 +1,4 @@
-package com.goodchalk.goodpass.admin.controller.form;
+package com.goodchalk.goodpass.admin.controller.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class AdminUserJoinForm {
+public class AdminUserJoinDto {
     private String username;
     private String name;
     private String contact;

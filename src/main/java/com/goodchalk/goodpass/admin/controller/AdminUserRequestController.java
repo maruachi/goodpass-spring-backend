@@ -1,6 +1,6 @@
 package com.goodchalk.goodpass.admin.controller;
 
-import com.goodchalk.goodpass.admin.controller.form.AdminUserRequestForm;
+import com.goodchalk.goodpass.admin.controller.dto.AdminUserRequestDto;
 import com.goodchalk.goodpass.admin.service.AdminUserRequestMailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,8 +22,8 @@ public class AdminUserRequestController {
 
     @ResponseBody
     @PostMapping("/admin-user/request")
-    public ResponseEntity<String> requestAdminUser(@RequestBody AdminUserRequestForm adminUserRequestForm) {
-        adminUserRequestMailService.sendUserRequestMail(adminUserRequestForm);
+    public ResponseEntity<String> requestAdminUser(@RequestBody AdminUserRequestDto adminUserRequestDto) {
+        adminUserRequestMailService.sendUserRequestMail(adminUserRequestDto);
 
         return new ResponseEntity<>("ok", HttpStatus.OK);
     }
