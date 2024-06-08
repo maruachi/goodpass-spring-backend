@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class AdminUserJoinController {
     private final AdminUserJoinService adminUserJoinService;
-    @GetMapping("/admin-user/join")
+    @GetMapping("/admin/join")
     public String getRequestAdminPage() {
         return "redirect:/admin-user-join.html";
     }
 
     @ResponseBody
-    @PostMapping("/admin-user/join")
+    @PostMapping("/admin/join")
     public ResponseEntity<String> requestAdminUser(@RequestBody AdminUserJoinDto adminUserJoinDto) {
         adminUserJoinService.join(adminUserJoinDto);
 

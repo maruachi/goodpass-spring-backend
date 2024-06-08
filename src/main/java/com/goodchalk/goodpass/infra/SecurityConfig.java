@@ -22,7 +22,11 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 //모든 request에 대해서 spring security에 의해 제어 받도록 변경
-                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+                        .requestMatchers(new AntPathRequestMatcher("/admin/login")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/admin/request")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/admin/test/all")).permitAll()
+                        .anyRequest().authenticated())
                 //h2-console 접속 시 spring security에 의해 생성된 csrf 보안 풀기
                 .csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/**")))
                 //X-Frame-Options 헤더 기본값 deny 설정 풀기

@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AdminUserRequestController {
     private final AdminUserRequestMailService adminUserRequestMailService;
-    @GetMapping("/admin-user/request")
+    @GetMapping("/admin/request")
     public String getRequestAdminPage() {
         return "redirect:/admin-user-request.html";
     }
 
     @ResponseBody
-    @PostMapping("/admin-user/request")
+    @PostMapping("/admin/request")
     public ResponseEntity<String> requestAdminUser(@RequestBody AdminUserRequestDto adminUserRequestDto) {
         adminUserRequestMailService.sendUserRequestMail(adminUserRequestDto);
 
