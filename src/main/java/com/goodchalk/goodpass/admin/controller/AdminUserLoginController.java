@@ -1,6 +1,7 @@
 package com.goodchalk.goodpass.admin.controller;
 
 import com.goodchalk.goodpass.admin.controller.dto.AdminUserLoginDto;
+import com.goodchalk.goodpass.admin.controller.dto.AdminUserLoginResponseDto;
 import com.goodchalk.goodpass.admin.service.AdminUserLoginService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,20 +16,20 @@ public class AdminUserLoginController {
     private final AdminUserLoginService adminUserLoginService;
 
     @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
-    public String AdminUserLogin(@RequestBody AdminUserLoginDto adminUserLoginDto, HttpServletResponse response) {
-        AdminUserLoginDto adminUserLoginResult = null;
+    public AdminUserLoginResponseDto AdminUserLogin(@RequestBody AdminUserLoginDto adminUserLoginDto, HttpServletResponse response) {
+        AdminUserLoginResponseDto adminUserLoginResponseDto = null;
         try {
-            adminUserLoginResult = adminUserLoginService.login(adminUserLoginDto);
+            adminUserLoginResponseDto = adminUserLoginService.login(adminUserLoginDto);
         } catch (RuntimeException e) {
             e.printStackTrace();
             response.setStatus(401);
-            return "로그인에 실패했습니다.";
+            return adminUserLoginResponseDto;
         }
 
-        String token = adminUserLoginResult.getToken();
+        String token = adminUserLoginResponseDto.getToken();
 
         response.setStatus(200);
         response.addHeader("Authorization", "Bearer " + token);
-        return "로그인에 성공했습니다.";
+        return adminUserLoginResponseDto;
     }
 }
