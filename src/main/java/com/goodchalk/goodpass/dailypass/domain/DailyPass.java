@@ -18,18 +18,27 @@ public class DailyPass {
     private Long id;
     @Column(name = "climbing_gym_id")
     private Long climbingGymId;
-    @Column(name = "signature_status")
-    private SignatureStatus signatureStatus;
     @Column(name = "guest_name")
     private String guestName;
     @Column(name = "contact")
     private String contact;
-    @Column(name = "daily_use_contract")
+    @Column(name = "daily_use_contract") @Enumerated(EnumType.STRING)
     private Contract dailyUseContract;
-    @Column(name = "privacy_contract")
+    @Column(name = "privacy_contract") @Enumerated(EnumType.STRING)
     private Contract privacyContract;
-    @Column(name = "request_datetime")
-    private LocalDateTime requestDateTime;
+    @Column(name = "signature_status") @Enumerated(EnumType.STRING)
+    private SignatureStatus signatureStatus;
     @Column(name = "signature_link")
     private String signatureLink;
+    @Column(name = "request_datetime")
+    private LocalDateTime requestDateTime;
+
+    public void updateSignatureStatus(SignatureStatus signatureStatus) {
+        this.signatureStatus = signatureStatus;
+        requestDateTime = LocalDateTime.now();
+    }
+
+    public void setSignatureLink(String signatureLink) {
+        this.signatureLink = signatureLink;
+    }
 }

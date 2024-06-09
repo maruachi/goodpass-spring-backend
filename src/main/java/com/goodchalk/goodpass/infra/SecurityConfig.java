@@ -30,6 +30,8 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+                        .requestMatchers(new AntPathRequestMatcher("/dailypass/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/dailypasses/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/admin/login")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/admin/request")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
