@@ -31,16 +31,22 @@ public class JWTProvider {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("role", String.class);
     }
 
+    public String getRoleValue(String token) {
+
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("roleValue", String.class);
+    }
+
     public Boolean isExpired(String token) {
 
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     }
 
-    public String createJwt(String username, String role) {
+    public String createJwt(String username, String role, String roleValue) {
 
         return Jwts.builder()
                 .claim("username", username)
                 .claim("role", role)
+                .claim("roleValue", roleValue)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiredMillisSeconds))
                 .signWith(secretKey)
