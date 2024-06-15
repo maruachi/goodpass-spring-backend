@@ -2,6 +2,7 @@ package com.goodchalk.goodpass.admin.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -25,10 +26,19 @@ public class AdminUser {
     private String emailAddress;
     @Enumerated(EnumType.STRING)
     private AdminRole adminRole;
+    private Long adminRoleValue;
     private LocalDateTime createDateTime;
 
     public void setAdminRoleToManager() {
         this.adminRole = AdminRole.MANAGER;
+    }
+
+    public void setCreateDateTimeToNow() {
+        this.createDateTime = LocalDateTime.now();
+    }
+
+    public void saveEncodedPassword(String password, PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(password);
     }
 
 }

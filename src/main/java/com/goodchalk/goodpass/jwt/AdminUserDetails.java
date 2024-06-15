@@ -47,4 +47,10 @@ public class AdminUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public Long getAdminRoleValue(){
+        return adminUser.getAdminRoleValue();
+    }
+
+
 }
