@@ -27,7 +27,8 @@ public class AdminUserLoginService {
         }
 
         String adminRole = adminUser.getAdminRole().toString();
-        String token = jwtProvider.createJwt(adminUser.getUsername(), adminRole);
+        String adminRoleValue = adminUser.getAdminRoleValue().toString();
+        String token = jwtProvider.createJwt(adminUser.getUsername(), adminRole, adminRoleValue);
 
         return AdminUserLoginResponseDto.builder()
                 .token(token)

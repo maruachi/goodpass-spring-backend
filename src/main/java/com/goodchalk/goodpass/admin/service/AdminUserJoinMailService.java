@@ -4,13 +4,15 @@ import com.goodchalk.goodpass.admin.domain.AdminUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
+@EnableAsync
 @Service
 public class AdminUserJoinMailService {
     private final JavaMailSender mailSender;
 
-    public boolean send(AdminUser adminUser, String temporaryPassword) {
+    public void send(AdminUser adminUser, String temporaryPassword) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(adminUser.getEmailAddress());
 
@@ -25,9 +27,6 @@ public class AdminUserJoinMailService {
             mailSender.send(mailMessage);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
-
-        return true;
     }
 }
