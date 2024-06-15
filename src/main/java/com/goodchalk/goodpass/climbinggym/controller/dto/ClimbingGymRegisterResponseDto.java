@@ -12,12 +12,14 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ClimbingGymRegisterResponseDto {
+    private Long climbingGymId;
     private String climbingGymName;
     private String address;
     private String instagramAccount;
     private LocalDateTime requestDateTime;
     public static ClimbingGymRegisterResponseDto from(ClimbingGym climbingGym) {
         return ClimbingGymRegisterResponseDto.builder()
+                .climbingGymId(climbingGym.getId())
                 .climbingGymName(climbingGym.getClimbingGymName())
                 .address(climbingGym.getAddress())
                 .instagramAccount(climbingGym.getInstagramAccount())
