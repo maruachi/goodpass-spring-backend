@@ -3,7 +3,7 @@ package com.goodchalk.goodpass;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = GoodpassSpringBackendApplication.class)
 class GoodpassSpringBackendApplicationTests {
 
 	@Test

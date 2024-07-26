@@ -17,10 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class AdminUserJoinController {
     private final AdminUserJoinService adminUserJoinService;
-    @GetMapping("/admin/join")
-    public String getRequestAdminPage() {
-        return "redirect:/admin-user-join.html";
-    }
 
     @ResponseBody
     @PostMapping("/admin/join")

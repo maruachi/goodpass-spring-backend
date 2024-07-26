@@ -20,7 +20,7 @@ public class AdminUserLoginService {
     public AdminUserLoginResponseDto login(AdminUserLoginDto adminUserLoginDto) {
         AdminUser adminUser = adminUserRepository.findByUsername(adminUserLoginDto.getUsername());
         if (adminUser == null) {
-            throw new GoodPassBusinessException("유저를 찾을 수 없습니다. uesrname = " + adminUserLoginDto.getUsername());
+            throw new GoodPassBusinessException("유저를 찾을 수 없습니다. username = " + adminUserLoginDto.getUsername());
         }
         if (!passwordEncoder.matches(adminUserLoginDto.getPassword(), adminUser.getPassword())) {
             throw new GoodPassBusinessException("비밀번호가 잘못됐습니다. username = " + adminUserLoginDto.getUsername());

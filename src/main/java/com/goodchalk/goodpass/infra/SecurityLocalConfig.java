@@ -5,6 +5,7 @@ import com.goodchalk.goodpass.jwt.JWTProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,7 +19,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
 
 import java.security.SecureRandom;
 
@@ -26,17 +26,23 @@ import java.security.SecureRandom;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-public class SecurityConfig {
+@Profile({"local"})
+public class SecurityLocalConfig {
     private final JWTProvider jwtProvider;
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers(new AntPathRequestMatcher("/dailypass/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/dailypasses/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/admin/login")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/admin/request")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/dailypasses/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/climbinggym/register/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/climbinggym/**/logo")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/climbinggym/**/poster/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/poster/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/logo/**")).permitAll()
                         .anyRequest().authenticated())
                 .csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/**")))
                 .headers((headers) -> headers.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))

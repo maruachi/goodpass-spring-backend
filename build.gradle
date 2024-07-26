@@ -33,14 +33,25 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'com.mysql:mysql-connector-j'
+    testImplementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+    testRuntimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3'
+    testRuntimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
 
-    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    testRuntimeOnly 'com.h2database:h2'
+    testRuntimeOnly 'com.mysql:mysql-connector-j'
+    testImplementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {

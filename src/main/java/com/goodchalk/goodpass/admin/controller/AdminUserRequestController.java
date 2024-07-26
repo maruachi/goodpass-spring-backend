@@ -15,10 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AdminUserRequestController {
     private final AdminUserRequestMailService adminUserRequestMailService;
-    @GetMapping("/admin/request")
-    public String getRequestAdminPage() {
-        return "redirect:/admin-user-request.html";
-    }
 
     @ResponseBody
     @PostMapping("/admin/request")

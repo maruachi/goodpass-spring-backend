@@ -4,6 +4,14 @@ spring:
       host: localhost
       port: 6379
       timeout: 6
+  jpa:
+    generate-ddl: 'true'
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
   h2:
     console:
       enabled: true
@@ -13,15 +21,6 @@ spring:
     url: jdbc:h2:~/goodpass
     username: sa
     password:
-  jpa:
-    generate-ddl: 'true'
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        #  show_sql: true
-        format_sql: true
-        use_sql_comments: true
   mail:
     host: smtp.gmail.com
     port: 587
@@ -33,5 +32,7 @@ spring:
   jwt:
     secret: ${SECRET_KEY}
     expiredSeconds: 7200000
+app:
+  email: good.chalk22@gmail.com
 server:
-  port: 8081
+  port: 8080

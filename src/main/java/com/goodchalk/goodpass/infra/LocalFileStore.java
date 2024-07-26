@@ -1,23 +1,21 @@
-package com.goodchalk.goodpass.dailypass.domain;
+package com.goodchalk.goodpass.infra;
 
-import com.goodchalk.goodpass.exception.GoodPassBusinessException;
 import com.goodchalk.goodpass.exception.GoodPassSystemException;
-import com.goodchalk.goodpass.infra.SignatureFileStore;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Component
-public class SignatureLocalSignatureFileStore implements SignatureFileStore {
-    private final static String FILE_STORE_NAME = "dailypasses";
+@RequiredArgsConstructor
+public class LocalFileStore implements FileStore {
+    private final String fileStorePath;
 
     @Override
-    public String upload(String DailyPassDirectoryName, String dailyPassFileName, InputStream inputStream) {
+    public String upload(String directoryName, String fileName, InputStream inputStream) {
         String userDir = System.getProperty("user.dir");
-        Path dailyPassDirectoryPath = Paths.get(userDir, FILE_STORE_NAME, DailyPassDirectoryName);
+        Path dailyPassDirectoryPath = Paths.get(userDir, fileStorePath, directoryName);
         if (!Files.exists(dailyPassDirectoryPath)) {
             try {
                 Files.createDirectories(dailyPassDirectoryPath);
@@ -26,9 +24,9 @@ public class SignatureLocalSignatureFileStore implements SignatureFileStore {
             }
         }
 
-        Path dailyPassFilePath = dailyPassDirectoryPath.resolve(dailyPassFileName);
-        File dailyPassFile = dailyPassFilePath.toFile();
-        try (FileOutputStream dailyPassOutputStream = new FileOutputStream(dailyPassFile);){
+        Path targetFilePath = dailyPassDirectoryPath.resolve(fileName);
+        File targetFile = targetFilePath.toFile();
+        try (FileOutputStream dailyPassOutputStream = new FileOutputStream(targetFile);){
             copyFile(inputStream, dailyPassOutputStream);
             dailyPassOutputStream.flush();
             dailyPassOutputStream.close();
@@ -37,7 +35,14 @@ public class SignatureLocalSignatureFileStore implements SignatureFileStore {
             throw new RuntimeException(e);
         }
 
-        return dailyPassFilePath.toAbsolutePath().toString();
+        String url = "http://localhost";
+        String port = "8081";
+        String action = "/" + Paths.get(userDir).relativize(targetFilePath).toString();
+        return url + ":" + port + action;
+    }
+
+    public String upload(String fileName, InputStream inputStream) {
+        return upload("", fileName, inputStream);
     }
 
     public static void copyFile(InputStream sourceStream, OutputStream destinationStream) throws IOException {
@@ -46,6 +51,5 @@ public class SignatureLocalSignatureFileStore implements SignatureFileStore {
         while ((length = sourceStream.read(buffer)) > 0) {
             destinationStream.write(buffer, 0, length);
         }
-
     }
 }
